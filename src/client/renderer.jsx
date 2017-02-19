@@ -1,8 +1,10 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
 
+console.log(React)
+
 const audioContext = new AudioContext()
-const Synthesizer = require('../server/synthesizer')
+const Synthesizer = require('./synth/synthesizer')
 
 const { Beeper } = require('./components')
 const { store, bulletin, actions } = require('./services')
@@ -44,6 +46,20 @@ bulletin.subscribe(UPDATE_SYNTH, (data) => {
     case 'filterEnv':
       synthMap[data.layer].updateFilterEnv(data.value)
       break
+
+    case 'modWaveForm':
+      synthMap[data.layer].updateModWaveform(data.value)
+      break
+    case 'modFrequency':
+      synthMap[data.layer].updateModFrequency(data.value)
+      break
+    case 'modOsc1':
+      synthMap[data.layer].updateModOsc1(data.value)
+      break
+    case 'modOsc2':
+      synthMap[data.layer].updateModOsc2(data.value)
+      break
+
   }
 })
 

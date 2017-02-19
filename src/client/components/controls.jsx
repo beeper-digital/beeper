@@ -27,9 +27,11 @@ class Controls extends React.Component {
         filterQ,
         filterMod,
         filterEnv,
+        modWaveForm,
       } = activeLayer.synthOptions
       this.setState({
         active: mode === 'controls',
+        modWaveForm,
         filterCutoff,
         filterQ,
         filterMod,
@@ -46,7 +48,12 @@ class Controls extends React.Component {
     if (activeLayer < 0) {
       activeLayer = 0
     }
-    let value = parseInt(event.target.value, 10)
+
+    let value = event.target.tagName === 'SELECT' ?
+      event.target.value :
+      parseInt(event.target.value, 10)
+
+    console.log(prop, value)
 
     switch (prop) {
       case 'filterCutoff':
@@ -61,6 +68,10 @@ class Controls extends React.Component {
       case 'filterEnv':
         this.setState({ filterEnv: value })
         break
+      default:
+        let update = {}
+        update[prop] = value
+        this.setState(update)
     }
     bulletin.publish(UPDATE_SYNTH, {
       prop,
@@ -78,6 +89,18 @@ class Controls extends React.Component {
   render() {
     return (
       <div className={"controls " + (this.state.active ? 'active' : '')}>
+        <p><strong>Mod</strong></p>
+        <div className="controls__section">
+          <label>waveform</label>
+          <select onChange={(e) => this.handleChange(e, 'modWaveForm')}
+            value={this.state.filterCutoff}>
+            <option>sine</option>
+            <option>square</option>
+            <option>sawtooth</option>
+            <option>triangle</option>
+          </select>
+        </div>
+
         <p><strong>Filter</strong></p>
         <div className="controls__section">
           <label>Cutoff</label>

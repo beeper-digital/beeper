@@ -14,6 +14,7 @@ const createLayer = (nameNumber = 1) => ({
   active: false,
   sequence: createSequence(),
   synthOptions: {
+    modWaveForm: 'sine',
     filterCutoff: 256,
     filterQ: 7,
     filterMod: 21,
