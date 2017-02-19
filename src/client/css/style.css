@@ -1,0 +1,20 @@
+@import url('./slider.css');
+@import url('./colors.css');
+@import url('./grid.css');
+@import url('./tile.css');
+@import url('./toolbar.css');
+@import url('./controls.css');
+
+body {
+  font-family: courier, monospace;
+}
+
+.clearfix {
+  overflow: auto;
+  zoom: 1;
+}
+
+.beeper {
+  position: relative;
+  margin-top: 100px;
+}
