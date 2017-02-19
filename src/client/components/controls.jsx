@@ -1,7 +1,7 @@
 const React = require('react')
 const _ = require('lodash')
 
-const { socket, store, actions } = require('../services')
+const { bulletin, store, actions } = require('../services')
 const { UPDATE_SYNTH } = actions
 
 class Controls extends React.Component {
@@ -62,7 +62,7 @@ class Controls extends React.Component {
         this.setState({ filterEnv: value })
         break
     }
-    socket.emit(UPDATE_SYNTH, {
+    bulletin.publish(UPDATE_SYNTH, {
       prop,
       layer: activeLayer,
       value,
@@ -78,6 +78,7 @@ class Controls extends React.Component {
   render() {
     return (
       <div className={"controls " + (this.state.active ? 'active' : '')}>
+        <p><strong>Filter</strong></p>
         <div className="controls__section">
           <label>Cutoff</label>
           <input onChange={(e) => this.handleChange(e, 'filterCutoff')} value={this.state.filterCutoff} min="20" max="20000" type="range" />

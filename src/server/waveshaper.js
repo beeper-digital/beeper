@@ -60,7 +60,7 @@ function generateColortouchCurve(curve) {
     var n2 = n / 2;
 
     for (var i = 0; i < n2; ++i) {
-        x = i / n2;
+        let x = i / n2;
         x = shape(x);
 
         curve[n2 + i] = x;

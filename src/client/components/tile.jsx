@@ -1,6 +1,6 @@
 const React = require('react')
 
-const { socket, store } = require('../services')
+const { bulletin, socket, store } = require('../services')
 
 const {
   UPDATE_SEQUENCE,
@@ -17,7 +17,7 @@ dragIcon.height = 0
 
 class Tile extends React.Component {
   componentWillMount() {
-    socket.on('heartbeat', (step) => {
+    bulletin.subscribe('heartbeat', step => {
       this.setState({
         highlight: this.props.sequenceNum === step,
       })
@@ -153,7 +153,7 @@ class Tile extends React.Component {
           let slider = this.state.activeSlider
           let val = parseInt(slider.value, 10)
           let ratio = (slider.max - slider.min) / 100
-          slider.value = val - deltaY * ratio * 0.5
+          slider.value = val - deltaY * ratio
           this.handleChange({ target: slider }, slider.dataset.prop)
         }
     }
