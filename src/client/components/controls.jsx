@@ -4,6 +4,8 @@ const _ = require('lodash')
 const { bulletin, store, actions } = require('../services')
 const { UPDATE_SYNTH } = actions
 
+const ControlInput = require('./control-input')
+
 class Controls extends React.Component {
   constructor(props) {
     super(props)
@@ -69,18 +71,12 @@ class Controls extends React.Component {
             <option>triangle</option>
           </select>
         </div>
-        <div className="controls__section">
-          <label>Freq</label>
-          <input onChange={(e) => this.handleChange(e, 'modFrequency')} value={this.state.modFrequency} min="0" max="100" type="range" />
-        </div>
-        <div className="controls__section">
-          <label>Osc1</label>
-          <input onChange={(e) => this.handleChange(e, 'modOsc1')} value={this.state.modOsc1} min="0" max="100" type="range" />
-        </div>
-        <div className="controls__section">
-          <label>Osc2</label>
-          <input onChange={(e) => this.handleChange(e, 'modOsc2')} value={this.state.modOsc2} min="0" max="100" type="range" />
-        </div>
+        <ControlInput name="Freq" handleChange={this.handleChange}
+          valueName="modFrequency" min="0" max="100" value={this.state.modFrequency} />
+        <ControlInput name="Osc1" handleChange={this.handleChange}
+          valueName="modOsc1" min="0" max="100" value={this.state.modOsc1} />
+        <ControlInput name="Osc2" handleChange={this.handleChange}
+          valueName="modOsc2" min="0" max="100" value={this.state.modOsc2} />
 
         <p><strong>Osc1</strong></p>
         <div className="controls__section">
@@ -102,34 +98,20 @@ class Controls extends React.Component {
             <option value="8'">8</option>
           </select>
         </div>
-        <div className="controls__section">
-          <label>Detune</label>
-          <input onChange={(e) => this.handleChange(e, 'osc1Detune')} value={this.state.osc1Detune} min="-1200" max="1200" type="range" />
-        </div>
-
-        <div className="controls__section">
-          <label>Mix</label>
-          <input onChange={(e) => this.handleChange(e, 'osc1Mix')} value={this.state.osc1Mix} min="0" max="100" type="range" />
-        </div>
-
+        <ControlInput name="Detune" handleChange={this.handleChange}
+          valueName="osc1Detune" min="-1200" max="1200" value={this.state.osc1Detune} />
+        <ControlInput name="Mix" handleChange={this.handleChange}
+          valueName="osc1Mix" min="0" max="100" value={this.state.osc1Mix} />
 
         <p><strong>Filter</strong></p>
-        <div className="controls__section">
-          <label>Cutoff</label>
-          <input onChange={(e) => this.handleChange(e, 'filterCutoff')} value={this.state.filterCutoff} min="20" max="20000" type="range" />
-        </div>
-        <div className="controls__section">
-          <label>Q</label>
-          <input onChange={(e) => this.handleChange(e, 'filterQ')} value={this.state.filterQ} min="0" max="20" type="range" />
-        </div>
-        <div className="controls__section">
-          <label>Mod</label>
-          <input onChange={(e) => this.handleChange(e, 'filterMod')} value={this.state.filterMod} min="0" max="100" type="range" />
-        </div>
-        <div className="controls__section">
-          <label>Env</label>
-          <input onChange={(e) => this.handleChange(e, 'filterEnv')} value={this.state.filterEnv} min="0" max="100" type="range" />
-        </div>
+        <ControlInput name="Cutoff" handleChange={this.handleChange}
+          valueName="filterCutoff" min="20" max="20000" value={this.state.filterCutoff} />
+        <ControlInput name="Q" handleChange={this.handleChange}
+          valueName="filterQ" min="0" max="20" value={this.state.filterQ} />
+        <ControlInput name="Mod" handleChange={this.handleChange}
+          valueName="filterMod" min="0" max="100" value={this.state.filterMod} />
+        <ControlInput name="Env" handleChange={this.handleChange}
+          valueName="filterEnv" min="0" max="100" value={this.state.filterEnv} />
       </div>
     )
   }
