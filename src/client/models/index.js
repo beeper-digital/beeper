@@ -22,6 +22,10 @@ const createLayer = (nameNumber = 1) => ({
     filterQ: 7,
     filterMod: 21,
     filterEnv: 56,
+    osc1Wave: 'sawtooth',
+    osc1Octave: "32'",
+    osc1Detune: 0,
+    osc1Mix: 50,
   },
 })
 

@@ -26,7 +26,7 @@ class Synthesizer {
     this.currentModOsc1 = 15
     this.currentModOsc2 = 17
 
-    this.currentOsc1Waveform = 2 // SAW
+    this.currentOsc1Waveform = 'sawtooth'
     this.currentOsc1Octave = 0  // 32'
     this.currentOsc1Detune = 0	// 0
     this.currentOsc1Mix = 50.0	// 50%
@@ -237,17 +237,18 @@ class Synthesizer {
     this.currentOsc1Waveform = value
     for (var i = 0; i < 255; i++) {
       if (this.voices[i]) {
-        this.voices[i].setOsc1Waveform(this.waveforms[this.currentOsc1Waveform])
+        this.voices[i].setOsc1Waveform(value)
       }
     }
   }
 
   updateOsc1Octave(value) {
     let options = ["32'", "16'", "8'"]
+    console.log(value)
     if (options.indexOf(value) === -1) {
       throw new RangeError()
     }
-    this.currentOsc1Octave = value
+    this.currentOsc1Octave = options.indexOf(value)
     for (var i = 0; i < 255; i++) {
       if (this.voices[i]) {
         this.voices[i].updateOsc1Frequency()

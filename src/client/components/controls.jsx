@@ -42,26 +42,6 @@ class Controls extends React.Component {
       event.target.value :
       parseInt(event.target.value, 10)
 
-    console.log(prop, value)
-
-    switch (prop) {
-      case 'filterCutoff':
-        this.setState({ filterCutoff: value })
-        break
-      case 'filterQ':
-        this.setState({ filterQ: value })
-        break
-      case 'filterMod':
-        this.setState({ filterMod: value })
-        break
-      case 'filterEnv':
-        this.setState({ filterEnv: value })
-        break
-      default:
-        let update = {}
-        update[prop] = value
-        this.setState(update)
-    }
     bulletin.publish(UPDATE_SYNTH, {
       prop,
       layer: activeLayer,
@@ -101,6 +81,37 @@ class Controls extends React.Component {
           <label>Osc2</label>
           <input onChange={(e) => this.handleChange(e, 'modOsc2')} value={this.state.modOsc2} min="0" max="100" type="range" />
         </div>
+
+        <p><strong>Osc1</strong></p>
+        <div className="controls__section">
+          <label>waveform</label>
+          <select onChange={(e) => this.handleChange(e, 'osc1Wave')}
+            value={this.state.osc1Wave}>
+            <option>sine</option>
+            <option>square</option>
+            <option>sawtooth</option>
+            <option>triangle</option>
+          </select>
+        </div>
+        <div className="controls__section">
+          <label>octave</label>
+          <select onChange={(e) => this.handleChange(e, 'osc1Octave')}
+            value={this.state.osc1Octave}>
+            <option value="32'">32</option>
+            <option value="16'">16</option>
+            <option value="8'">8</option>
+          </select>
+        </div>
+        <div className="controls__section">
+          <label>Detune</label>
+          <input onChange={(e) => this.handleChange(e, 'osc1Detune')} value={this.state.osc1Detune} min="-1200" max="1200" type="range" />
+        </div>
+
+        <div className="controls__section">
+          <label>Mix</label>
+          <input onChange={(e) => this.handleChange(e, 'osc1Mix')} value={this.state.osc1Mix} min="0" max="100" type="range" />
+        </div>
+
 
         <p><strong>Filter</strong></p>
         <div className="controls__section">

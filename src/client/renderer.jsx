@@ -60,6 +60,19 @@ bulletin.subscribe(UPDATE_SYNTH, (data) => {
       synthMap[data.layer].updateModOsc2(data.value)
       break
 
+    case 'osc1Wave':
+      synthMap[data.layer].updateOsc1Wave(data.value)
+      break
+    case 'osc1Octave':
+      synthMap[data.layer].updateOsc1Octave(data.value)
+      break
+    case 'osc1Detune':
+      synthMap[data.layer].updateOsc1Detune(data.value)
+      break
+    case 'osc1Mix':
+      synthMap[data.layer].updateOsc1Mix(data.value)
+      break
+
   }
 })
 

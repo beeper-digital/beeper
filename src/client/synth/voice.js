@@ -54,7 +54,7 @@ const Voice = function Voice(note, velocity, synth) {
   // create osc 1
   this.osc1 = audioContext.createOscillator()
   this.updateOsc1Frequency()
-  this.osc1.type = waveforms[currentOsc1Waveform]
+  this.osc1.type = currentOsc1Waveform
 
   this.osc1Gain = audioContext.createGain()
   // this.osc1Gain.gain.value = 0.005 * currentOsc1Mix
