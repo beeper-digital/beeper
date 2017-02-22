@@ -21,7 +21,7 @@ class Synthesizer {
     this.waveforms = ['sine', 'square', 'sawtooth', 'triangle']
 
     // This is the "initial patch"
-    this.currentModWaveform = 0	// SINE
+    this.currentModWaveform = 'sine'
     this.currentModFrequency = 2.1 // Hz * 10 = 2.1
     this.currentModOsc1 = 15
     this.currentModOsc2 = 17
@@ -142,7 +142,7 @@ class Synthesizer {
     this.currentModWaveform = value
     for (var i = 0; i < 255; i++) {
       if (this.voices[i]) {
-        this.voices[i].setModWaveform(this.waveforms[this.currentModWaveform])
+        this.voices[i].setModWaveform(value)
       }
     }
   }

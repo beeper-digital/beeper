@@ -73,7 +73,7 @@ const Voice = function Voice(note, velocity, synth) {
 
   // create modulator osc
   this.modOsc = audioContext.createOscillator()
-  this.modOsc.type = 	waveforms[currentModWaveform]
+  this.modOsc.type = 	currentModWaveform
   this.modOsc.frequency.value = currentModFrequency * modOscFreqMultiplier
 
   this.modOsc1Gain = audioContext.createGain()
