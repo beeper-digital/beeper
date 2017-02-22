@@ -22,21 +22,10 @@ class Controls extends React.Component {
       if (!activeLayer) {
         activeLayer = layers[0]
       }
-      let {
-        filterCutoff,
-        filterQ,
-        filterMod,
-        filterEnv,
-        modWaveForm,
-      } = activeLayer.synthOptions
-      this.setState({
-        active: mode === 'controls',
-        modWaveForm,
-        filterCutoff,
-        filterQ,
-        filterMod,
-        filterEnv,
-      })
+      this.setState(_.assign(
+        { active: mode === 'controls' },
+        activeLayer.synthOptions
+      ))
     })
 
     this.handleChange = this.handleChange.bind(this)
@@ -93,12 +82,24 @@ class Controls extends React.Component {
         <div className="controls__section">
           <label>waveform</label>
           <select onChange={(e) => this.handleChange(e, 'modWaveForm')}
-            value={this.state.filterCutoff}>
+            value={this.state.modWaveForm}>
             <option>sine</option>
             <option>square</option>
             <option>sawtooth</option>
             <option>triangle</option>
           </select>
+        </div>
+        <div className="controls__section">
+          <label>Freq</label>
+          <input onChange={(e) => this.handleChange(e, 'modFrequency')} value={this.state.modFrequency} min="0" max="100" type="range" />
+        </div>
+        <div className="controls__section">
+          <label>Osc1</label>
+          <input onChange={(e) => this.handleChange(e, 'modOsc1')} value={this.state.modOsc1} min="0" max="100" type="range" />
+        </div>
+        <div className="controls__section">
+          <label>Osc2</label>
+          <input onChange={(e) => this.handleChange(e, 'modOsc2')} value={this.state.modOsc2} min="0" max="100" type="range" />
         </div>
 
         <p><strong>Filter</strong></p>

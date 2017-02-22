@@ -148,9 +148,10 @@ class Synthesizer {
   }
 
   updateModFrequency(value) {
-    if (value < 0 || value > 10) {
-      throw new RangeError('value must be between 0 and 10')
+    if (value < 0 || value > 100) {
+      throw new RangeError('value must be between 0 and 100')
     }
+    value /= 10
     this.currentModFrequency = value
     var oscFreq = this.currentModFrequency * this.modOscFreqMultiplier
     for (var i = 0; i < 255; i++) {
