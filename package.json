@@ -1,13 +1,12 @@
 {
   "name": "beeperfleet",
   "version": "0.1.1",
-  "description": "A co-op music sequencer",
-  "main": "src/client/main.js",
+  "description": "A music sequencer and synthesizer using electron",
+  "main": "src/main.js",
   "scripts": {
-    "start": "electron -r babel-register src/client/main.js",
-    "server": "electron -r babel-register src/server/main.js"
+    "start": "electron -r babel-register src/main.js"
   },
-  "repository": "https://github.com/LucianBuzzo/beeperfleet",
+  "repository": "https://github.com/LucianBuzzo/beeper",
   "author": "GitHub",
   "license": "CC0-1.0",
   "dependencies": {
