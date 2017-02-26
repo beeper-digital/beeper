@@ -38,12 +38,12 @@ class ToolbarRight extends React.Component {
     return (
       <div className="toolbar toolbar-right">
         <button
-          className={(this.state.showLayers ? 'active' : '')}
+          className={'toolbar__button ' + (this.state.showLayers ? 'active' : '')}
           onClick={this.toggleLayers}>
           <i className="fa fa-server" aria-hidden="true"></i>
         </button>
         {this.state.showLayers &&
-          <button onClick={this.addLayer}>
+          <button className='toolbar__button' onClick={this.addLayer}>
             <i className="fa fa-plus" aria-hidden="true"></i>
           </button>
         }

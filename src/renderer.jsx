@@ -82,6 +82,10 @@ const tick = () => {
   let layers = store.getState().get('layers').toJS()
 
   layers.forEach((layer, layerIndex) => {
+    if (layer.muted) {
+      return
+    }
+
     if (layer.sequence[currentStep].active) {
       let { pitch, gain, length } = layer.sequence[currentStep]
       // Add the zero to create a new variable instead of a reference

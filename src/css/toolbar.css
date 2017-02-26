@@ -11,7 +11,7 @@
   right: 30px;
 }
 
-.toolbar button {
+.toolbar__button {
   padding: 0;
   background: none;
   width: 60px;
@@ -22,12 +22,12 @@
   transition: all ease-in-out 50ms;
 }
 
-.toolbar button:focus {
+.toolbar__button:focus {
   outline: none;
 }
 
-.toolbar button:hover,
-.toolbar button.active {
+.toolbar__button:hover,
+.toolbar__button.active {
   background: #333;
   color: white;
 }

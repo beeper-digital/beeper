@@ -4,15 +4,16 @@ const Immutable = require('immutable')
 const { Layer } = require('../models')
 
 const {
-  UPDATE_SYNTH,
-  CHANGE_MODE,
-  ADD_LAYER,
   ACTIVATE_LAYER,
-  TOGGLE_LAYERS,
+  ADD_LAYER,
+  CHANGE_MODE,
+  MUTE_LAYER,
   SEQ_ACTIVE_UPDATE,
   SEQ_GAIN_UPDATE,
   SEQ_LENGTH_UPDATE,
   SEQ_PITCH_UPDATE,
+  TOGGLE_LAYERS,
+  UPDATE_SYNTH,
 } = require('./actions')
 
 
@@ -38,6 +39,8 @@ const reducer = (state, action) => {
           layer.set('active', true) :
           layer.set('active', false)
       })).set('showLayers', !state.get('showLayers'))
+    case MUTE_LAYER:
+      return state.setIn(['layers', action.layer, 'muted'], action.value)
     case SEQ_ACTIVE_UPDATE:
       return state.setIn(['layers', action.layer, 'sequence', action.tile, 'active'], action.value)
     case SEQ_LENGTH_UPDATE:

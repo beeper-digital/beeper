@@ -6,17 +6,24 @@ const Tile = require('./tile')
 const {
   ACTIVATE_LAYER,
   CHANGE_MODE,
+  MUTE_LAYER,
 } = require('../services/actions')
 
 class Layer extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { active: false }
+    this.state = {
+      active: false,
+      muted: false,
+    }
     this.selectLayer = this.selectLayer.bind(this)
+    this.muteLayer = this.muteLayer.bind(this)
 
     store.subscribe(() => {
       let active = store.getState().getIn(['layers', this.props.layerNumber, 'active'])
-      this.setState({ active })
+      let muted = store.getState().getIn(['layers', this.props.layerNumber, 'muted'])
+      console.log('is muted?', muted)
+      this.setState({ active, muted })
     })
   }
 
@@ -32,6 +39,15 @@ class Layer extends React.Component {
     })
   }
 
+  muteLayer() {
+    console.log('muteLayer')
+    store.dispatch({
+      type: MUTE_LAYER,
+      layer: this.props.layerNumber,
+      value: !this.state.muted,
+    })
+  }
+
   render() {
     const tiles = this.props.layer.sequence.map((item, index) =>
       <Tile sequenceNum={index} key={index} layer={this.props.layerNumber} />
@@ -41,6 +57,9 @@ class Layer extends React.Component {
         className={"layer clearfix " + (this.state.active ? 'active' : '')}>
         <div onClick={this.selectLayer} className="layer__mask"></div>
         {tiles}
+        <button className="mute-btn toolbar__button" onClick={this.muteLayer}>
+          <i className={'fa fa-volume-' + (this.state.muted ? 'off' : 'up')} aria-hidden="true"></i>
+        </button>
       </div>
     )
   }

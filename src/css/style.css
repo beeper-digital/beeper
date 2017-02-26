@@ -10,7 +10,6 @@ body {
 }
 
 .clearfix {
-  overflow: auto;
   zoom: 1;
 }
 

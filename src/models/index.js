@@ -12,6 +12,7 @@ const createSequence = () => [...Array(SEQUENCE_LENGTH)].map(() => ({
 const createLayer = (nameNumber = 1) => ({
   name: 'Layer ' + nameNumber,
   active: false,
+  muted: false,
   sequence: createSequence(),
   synthOptions: {
     modWaveForm: 'sine',
