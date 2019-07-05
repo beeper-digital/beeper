@@ -4,7 +4,9 @@
   "description": "A music sequencer and synthesizer using electron",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron -r babel-register src/main.js"
+    "start": "electron -r babel-register src/main.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": "https://github.com/LucianBuzzo/beeper",
   "author": "GitHub",
@@ -23,6 +25,8 @@
     "redux": "^3.6.0",
     "socket.io": "^1.7.2",
     "socket.io-client": "^1.7.2",
-    "uuid": "^3.0.1"
-  }
+    "uuid": "^3.0.1",
+    "snyk": "^1.192.3"
+  },
+  "snyk": true
 }
