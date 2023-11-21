@@ -1,6 +1,6 @@
 {
   "name": "beeperfleet",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "A music sequencer and synthesizer",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
