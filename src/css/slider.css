@@ -20,11 +20,9 @@
   right: -17px;
   transform: rotate(90deg);
   background: none;
-  user-select: none;
-  pointer-events: none;
 }
 
-input[type=range]:focus {
+input[type="range"]:focus {
   outline: none;
 }
 .control-slider::-webkit-slider-thumb {
@@ -43,5 +41,3 @@ input[type=range]:focus {
 .slider-length.control-slider::-webkit-slider-thumb {
   background: #6c71c4;
 }
-
-

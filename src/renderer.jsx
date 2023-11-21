@@ -1,109 +1,104 @@
-const React = require('react')
-const ReactDOM = require('react-dom')
+const React = require("react");
+const ReactDOM = require("react-dom");
 
-console.log(React)
+console.log(React);
 
-const audioContext = new AudioContext()
-const Synthesizer = require('./synth/synthesizer')
+const audioContext = new AudioContext();
+const Synthesizer = require("./synth/synthesizer");
 
-const { Beeper } = require('./components')
-const { store, bulletin, actions } = require('./services')
+const { Beeper } = require("./components");
+const { store, bulletin, actions } = require("./services");
 
-const { UPDATE_SYNTH } = actions
+const { UPDATE_SYNTH } = actions;
 
-const SEQUENCE_LENGTH = 16
-let currentStep = 0
-const BPM = 120
-const synthMap = [new Synthesizer(audioContext)]
+const SEQUENCE_LENGTH = 16;
+let currentStep = 0;
+const BPM = 120;
+const synthMap = [new Synthesizer(audioContext)];
 
-ReactDOM.render(
-  <Beeper />,
-  document.getElementById('root')
-)
+ReactDOM.render(<Beeper />, document.getElementById("root"));
 
-console.log(store.getState().toJS())
+console.log(store.getState().toJS());
 
 store.subscribe(() => {
-  const layers = store.getState().get('layers').toJS()
+  const layers = store.getState().get("layers").toJS();
   layers.forEach((layer, index) => {
     if (!synthMap[index]) {
-      synthMap[index] = new Synthesizer(audioContext)
+      synthMap[index] = new Synthesizer(audioContext);
     }
-  })
-})
+  });
+});
 
 bulletin.subscribe(UPDATE_SYNTH, (data) => {
   switch (data.prop) {
-    case 'filterCutoff':
-      synthMap[data.layer].updateFilterCutoff(data.value)
-      break
-    case 'filterQ':
-      synthMap[data.layer].updateFilterQ(data.value)
-      break
-    case 'filterMod':
-      synthMap[data.layer].updateFilterMod(data.value)
-      break
-    case 'filterEnv':
-      synthMap[data.layer].updateFilterEnv(data.value)
-      break
+    case "filterCutoff":
+      synthMap[data.layer].updateFilterCutoff(data.value);
+      break;
+    case "filterQ":
+      synthMap[data.layer].updateFilterQ(data.value);
+      break;
+    case "filterMod":
+      synthMap[data.layer].updateFilterMod(data.value);
+      break;
+    case "filterEnv":
+      synthMap[data.layer].updateFilterEnv(data.value);
+      break;
 
-    case 'modWaveForm':
-      synthMap[data.layer].updateModWaveform(data.value)
-      break
-    case 'modFrequency':
-      synthMap[data.layer].updateModFrequency(data.value)
-      break
-    case 'modOsc1':
-      synthMap[data.layer].updateModOsc1(data.value)
-      break
-    case 'modOsc2':
-      synthMap[data.layer].updateModOsc2(data.value)
-      break
+    case "modWaveForm":
+      synthMap[data.layer].updateModWaveform(data.value);
+      break;
+    case "modFrequency":
+      synthMap[data.layer].updateModFrequency(data.value);
+      break;
+    case "modOsc1":
+      synthMap[data.layer].updateModOsc1(data.value);
+      break;
+    case "modOsc2":
+      synthMap[data.layer].updateModOsc2(data.value);
+      break;
 
-    case 'osc1Wave':
-      synthMap[data.layer].updateOsc1Wave(data.value)
-      break
-    case 'osc1Octave':
-      synthMap[data.layer].updateOsc1Octave(data.value)
-      break
-    case 'osc1Detune':
-      synthMap[data.layer].updateOsc1Detune(data.value)
-      break
-    case 'osc1Mix':
-      synthMap[data.layer].updateOsc1Mix(data.value)
-      break
-
+    case "osc1Wave":
+      synthMap[data.layer].updateOsc1Wave(data.value);
+      break;
+    case "osc1Octave":
+      synthMap[data.layer].updateOsc1Octave(data.value);
+      break;
+    case "osc1Detune":
+      synthMap[data.layer].updateOsc1Detune(data.value);
+      break;
+    case "osc1Mix":
+      synthMap[data.layer].updateOsc1Mix(data.value);
+      break;
   }
-})
+});
 
 const tick = () => {
-  bulletin.publish('heartbeat', currentStep)
+  bulletin.publish("heartbeat", currentStep);
 
-  let layers = store.getState().get('layers').toJS()
+  let layers = store.getState().get("layers").toJS();
 
   layers.forEach((layer, layerIndex) => {
     if (layer.muted) {
-      return
+      return;
     }
 
     if (layer.sequence[currentStep].active) {
-      let { pitch, gain, length } = layer.sequence[currentStep]
+      let { pitch, gain, length } = layer.sequence[currentStep];
       // Add the zero to create a new variable instead of a reference
-      pitch = pitch + 0
+      pitch = pitch + 0;
 
-      synthMap[layerIndex].noteOn(pitch, gain)
+      synthMap[layerIndex].noteOn(pitch, gain);
 
-      setTimeout(() => synthMap[layerIndex].noteOff(pitch), length)
+      setTimeout(() => synthMap[layerIndex].noteOff(pitch), length / 4);
     }
-  })
+  });
 
-  currentStep++
-    if (currentStep >= SEQUENCE_LENGTH) {
-    currentStep = 0
+  currentStep++;
+  if (currentStep >= SEQUENCE_LENGTH) {
+    currentStep = 0;
   }
-}
+};
 
 setInterval(() => {
-  tick()
-}, 60000 / (BPM * 4))
-
+  tick();
+}, 60000 / (BPM * 4));
