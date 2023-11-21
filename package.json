@@ -1,10 +1,11 @@
 {
   "name": "beeperfleet",
   "version": "0.1.1",
-  "description": "A music sequencer and synthesizer using electron",
-  "main": "src/main.js",
+  "description": "A music sequencer and synthesizer",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
   },
   "repository": "https://github.com/LucianBuzzo/beeper",
   "author": "GitHub",
